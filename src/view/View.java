@@ -27,6 +27,7 @@ public class View {
     // return;  }
 
     public ContactoDTO addContacto() {
+        System.out.println("Introduzca el nombre y telefono de su contacto: ");
         String nombre = scanner.next();
         String telefono = scanner.next();
         return new ContactoDTO(nombre, telefono);
@@ -40,16 +41,16 @@ public class View {
     }
 
     public void imprimirMenuPrincipal() {
-        System.out.println("Bienvenido a tu agenda");
+        System.out.println("-- Bienvenido a tu agenda --");
         System.out.println("1. Mostrar Agendas");
         System.out.println("2. Añadir Agenda");
         System.out.println("3. Eliminar Agenda");
     }
 
     public void mostrarLsitaAgendas(List<Agenda> agendas) {
-        System.out.println("Estas son tus agendas: ");
-        agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda));
-        System.out.println("¿Que agenda quiere?");
+            System.out.println("Estas son tus agendas: ");
+            agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda));
+            System.out.println("¿Que agenda quieres?");
     }
 
     public void imprimirMenuContactos() {

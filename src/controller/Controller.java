@@ -8,8 +8,8 @@ import view.View;
 import java.util.List;
 
 public class Controller {
-    View view = new View();
-    Model model = new Model();
+    public View view = new View();
+    public Model model = new Model();
     int opcion;
     int opcionAgenda;
 
