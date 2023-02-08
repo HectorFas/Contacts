@@ -1,11 +1,11 @@
-package model;
+package controller;
 
-public class Agenda {
+public class AgendaDTO {
     public String nombreAgenda;
     public String descripcionAgenda;
 
 
-    Agenda(String nombreAgend, String descripcionAgend) {
+   public AgendaDTO(String nombreAgend, String descripcionAgend) {
         this.nombreAgenda = nombreAgend;
         this.descripcionAgenda = descripcionAgend;
     }
