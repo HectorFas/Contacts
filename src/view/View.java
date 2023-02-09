@@ -70,6 +70,16 @@ public class View {
         String nombreAgenda = scanner.next();
         return  nombreAgenda;
     }
+
+    public void ponloEnOtraAgenda() {
+        System.out.println("¿Este contacto solo esta en esta agenda, quieres ponerlo en alguna más?");
+        System.out.println("1. SI");
+        System.out.println("2. NO");
+    }
+
+    public void enQueAgenda() {
+        System.out.println("¿En que agenda lo pongo?");
+    }
 }
 
 

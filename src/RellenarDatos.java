@@ -20,7 +20,11 @@ public class RellenarDatos {
         contactos.add(contacto2);
         contactos.add(contacto3);
 
+        agenda1.contactosDeCadaAgenda.add(contacto1);
+        agenda1.contactosDeCadaAgenda.add(contacto2);
+        agenda1.contactosDeCadaAgenda.add(contacto3);
 
+        agenda2.contactosDeCadaAgenda.add(contacto3);
 
     }
 }

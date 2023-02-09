@@ -27,11 +27,20 @@ public class Controller {
                       System.out.println();
 
                       if (opcion == 1) {
-                          List<Contacto> contactos = model.listaContactos();
+                          List<Contacto> contactos = model.listaContactosDeAgenda(opcionAgenda);
                           view.mostrarContactos(contactos);
                       } else if (opcion == 2) {
                           ContactoDTO datos = view.addContacto();
-                          model.addContacto(datos);
+                          boolean falta = model.addContacto(datos, opcionAgenda);
+                          if (falta) {
+                              view.ponloEnOtraAgenda();
+                              opcion = view.pedirOpcion();
+                              if (opcion == 1) {
+                                  view.enQueAgenda();
+                                  opcionAgenda = view.pedirOpcion();
+                                  model.addContacto(datos, opcionAgenda);
+                              }
+                          }
                       } else if (opcion == 3) {
                           ContactoDTO eliminado = view.eliminarContacto();
                           model.removeContacto(eliminado);
@@ -52,3 +61,5 @@ public class Controller {
 
     }
 }
+
+// Buscar Contactos,

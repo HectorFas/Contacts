@@ -10,25 +10,45 @@ public class Model {
     public ArrayList<Contacto> listaAContactos = new ArrayList<>();
     public ArrayList<Agenda> listaDeAgendas = new ArrayList<>();
 
-    public void addContacto(ContactoDTO datos) {
+    public boolean addContacto(ContactoDTO datos, int opcionAgenda) {
         listaAContactos.add(new Contacto(datos.nombre, datos.telefono));
+        listaDeAgendas.get(opcionAgenda).contactosDeCadaAgenda.add(new Contacto(datos.nombre, datos.telefono));
+
+        for (int i = 0; i < listaDeAgendas.size(); i++) {
+            if (opcionAgenda != i) {
+                for (Contacto contacto : listaDeAgendas.get(i).contactosDeCadaAgenda) {
+                    if (contacto.nombre.equals(datos.nombre)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
-    public List<Contacto> listaContactos() {
-        return listaAContactos;
-
+    public List<Contacto> listaContactosDeAgenda(int opcionAgenda) {
+        return listaDeAgendas.get(opcionAgenda).contactosDeCadaAgenda;
     }
 
     public void removeContacto(ContactoDTO eliminado) {
        listaAContactos.removeIf(contacto -> contacto.nombre.equals(eliminado.nombre) || contacto.telefono.equals(eliminado.telefono));
     }
 
+    public List<Contacto> buscarContactos (String busqueda) {
+        List<Contacto> contactosEncontrados = new ArrayList<>();
+        for (Contacto contacto : listaAContactos) {
+            if (contacto.nombre.contains(busqueda) || contacto.telefono.contains(busqueda)) {
+                contactosEncontrados.add(contacto);
+            }
+        }
+        return  contactosEncontrados;  //Para Buscar Contactos!!!
+    }
+
     public void addAgenda(AgendaDTO datos) {
         listaDeAgendas.add(new Agenda(datos.nombreAgenda, datos.descripcionAgenda));
-
     }
 
     public void removeAgenda(String eliminado) {
-        listaAContactos.removeIf(contacto -> contacto.nombre.equals(eliminado));
+        listaDeAgendas.removeIf(Agenda -> eliminado.equals(Agenda.nombreAgenda));
     }
 }
