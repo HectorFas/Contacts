@@ -56,8 +56,10 @@ public class View {
     public void imprimirMenuContactos() {
         System.out.println("1. Mostrar lista de contactos");
         System.out.println("2. Añadir contacto");
-        System.out.println("3. Eliminar contacto");
-        System.out.println("4. Salir de la agenda");
+        System.out.println("3. Modificar contacto");
+        System.out.println("4. Buscar contacto");
+        System.out.println("5. Eliminar contacto");
+        System.out.println("6. Salir de la agenda");
     }
 
     public AgendaDTO addAgenda() {
@@ -79,6 +81,17 @@ public class View {
 
     public void enQueAgenda() {
         System.out.println("¿En que agenda lo pongo?");
+    }
+
+    public String buscarContacto() {
+        System.out.println("Para buscar un contacto ponga su numero o telefono: ");
+        return scanner.next();
+    }
+
+    public void imprimirContactosEncontrados(List<Contacto> contactosEncontrados) {
+        System.out.println("Se han encontrado estos contactos: ");
+        contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
+
     }
 }
 

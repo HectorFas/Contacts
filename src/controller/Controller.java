@@ -42,9 +42,15 @@ public class Controller {
                             }
                         }
                     } else if (opcion == 3) {
+
+                    } else if (opcion == 4) {
+                        String busqueda = view.buscarContacto();
+                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda);
+                        view.imprimirContactosEncontrados(contactosEncontrados);
+                    } else if (opcion == 5) {
                         ContactoDTO eliminado = view.eliminarContacto();
                         model.removeContacto(eliminado);
-                    } else if (opcion == 4) {
+                    } else if (opcion == 6) {
                         break;
                     }
                     System.out.println();
