@@ -37,7 +37,7 @@ public class Model {
     public List<Contacto> buscarContactos (String busqueda) {
         List<Contacto> contactosEncontrados = new ArrayList<>();
         for (Contacto contacto : listaAContactos) {
-            if (contacto.nombre.contains(busqueda) || contacto.telefono.contains(busqueda)) {
+            if (contacto.nombre.toLowerCase().contains(busqueda.toLowerCase()) || contacto.telefono.toLowerCase().contains(busqueda.toLowerCase())) {
                 contactosEncontrados.add(contacto);
             }
         }
@@ -50,5 +50,22 @@ public class Model {
 
     public void removeAgenda(String eliminado) {
         listaDeAgendas.removeIf(Agenda -> eliminado.equals(Agenda.nombreAgenda));
+    }
+
+
+    public void modificarNombre(List<Contacto> contactosEncontrados, int contactoModificar, String nombre) {
+        for ( Contacto contacto: listaAContactos) {
+            if (contactosEncontrados.get(contactoModificar).equals(contacto)) {
+                contacto.nombre = nombre;
+            }
+        }
+    }
+
+    public void modificarTelefono(List<Contacto> contactosEncontrados, int contactoModificar, String telefono) {
+        for ( Contacto contacto: listaAContactos) {
+            if (contactosEncontrados.get(contactoModificar).equals(contacto)) {
+                contacto.telefono = telefono;
+            }
+        }
     }
 }

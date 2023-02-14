@@ -49,7 +49,7 @@ public class View {
 
     public void mostrarLsitaAgendas(List<Agenda> agendas) {
             System.out.println("Estas son tus agendas: ");
-            agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda));
+            agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda + " ---- " + agenda.contactosDeCadaAgenda.size()));
             System.out.println("¿Que agenda quieres?");
     }
 
@@ -92,6 +92,37 @@ public class View {
         System.out.println("Se han encontrado estos contactos: ");
         contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
 
+    }
+
+    public String buscarContactoModificar() {
+        System.out.println("Escribe el nombre o el numero del contacto a modificar");
+        return  scanner.next();
+    }
+
+    public int imprimirContactosModificar(List<Contacto> contactosEncontrados) {
+        int contactoModificar = 0;
+        System.out.println("Coincidencias con tu busqueda: ");
+        contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
+        if (contactosEncontrados.size() > 1) {
+            System.out.println("Elije el contacto a modificar (1,2,3...)");
+            contactoModificar = scanner.nextInt();
+        }
+        System.out.println("¿Quieres modificar el nombre o el telefono?");
+        System.out.println("1. El nombre");
+        System.out.println("2. El telefono");
+        return contactoModificar;
+    }
+
+    public String pedirNombreModificar() {
+        System.out.println("Cual sera el nuevo nombre");
+        return scanner.next();
+    }
+
+
+
+    public String pedirTelefonoModificar() {
+        System.out.println("Cual sera el nuevo telefono");
+        return scanner.next();
     }
 }
 

@@ -42,7 +42,17 @@ public class Controller {
                             }
                         }
                     } else if (opcion == 3) {
-
+                        String busqueda = view.buscarContactoModificar();
+                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda);
+                        int contactoModificar = view.imprimirContactosModificar(contactosEncontrados);
+                        opcion = view.pedirOpcion();
+                        if (opcion == 1) {
+                          String nombre = view.pedirNombreModificar();
+                          model.modificarNombre(contactosEncontrados, contactoModificar, nombre);
+                        } else {
+                            String telefono = view.pedirTelefonoModificar();
+                            model.modificarTelefono(contactosEncontrados, contactoModificar, telefono);
+                        }
                     } else if (opcion == 4) {
                         String busqueda = view.buscarContacto();
                         List<Contacto> contactosEncontrados = model.buscarContactos(busqueda);
