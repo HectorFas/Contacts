@@ -5,7 +5,7 @@ public class Main {
 
         Controller controller = new Controller();
         RellenarDatos rellenarDatos = new RellenarDatos();
-        rellenarDatos.rellenar(controller.model.listaDeAgendas, controller.model.listaAContactos);
+        rellenarDatos.rellenar(controller.model.listaDeAgendas);
 
        controller.acorrer();
 

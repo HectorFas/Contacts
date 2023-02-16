@@ -4,7 +4,7 @@ import model.Contacto;
 import java.util.List;
 
 public class RellenarDatos {
-    void rellenar(List<Agenda> agendaList, List<Contacto> contactos) {
+    void rellenar(List<Agenda> agendaList) {
         Agenda agenda1 = new Agenda("Trabajo", "Mis amiguitos del trabajo");
         Agenda agenda2 = new Agenda("Personal", "Mis amiguitos");
 
@@ -16,9 +16,7 @@ public class RellenarDatos {
         Contacto contacto3 = new Contacto("Ana", "12321");
 
 
-        contactos.add(contacto1);
-        contactos.add(contacto2);
-        contactos.add(contacto3);
+
 
         agenda1.contactosDeCadaAgenda.add(contacto1);
         agenda1.contactosDeCadaAgenda.add(contacto2);

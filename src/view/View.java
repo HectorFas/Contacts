@@ -123,6 +123,14 @@ public class View {
         System.out.println("Cual sera el nuevo telefono");
         return scanner.next();
     }
+
+    public void imprimirErrorOpcion() {
+        System.out.println("¡Oh no, ha ocurrido un error!");
+        System.out.println("Posibles causas:");
+        System.out.println("1. Ha intentado a acceder a un registro inexistente");
+        System.out.println("2. Le falta calle");
+        System.out.println();
+    }
 }
 
 

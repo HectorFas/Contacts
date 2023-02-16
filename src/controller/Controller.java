@@ -14,64 +14,75 @@ public class Controller {
     int opcionAgenda;
 
     public void acorrer() {
-        for (; ; ) {
-            view.imprimirMenuPrincipal();
-            opcion = view.pedirOpcion();
-            if (opcion == 1) {
-                List<Agenda> agendas = model.listaDeAgendas;
-                view.mostrarLsitaAgendas(agendas);
-                opcionAgenda = view.pedirOpcion();
-                for (; ; ) {
-                    view.imprimirMenuContactos();
-                    opcion = view.pedirOpcion();
-                    System.out.println();
-
-                    if (opcion == 1) {
-                        List<Contacto> contactos = model.listaContactosDeAgenda(opcionAgenda);
-                        view.mostrarContactos(contactos);
-                    } else if (opcion == 2) {
-                        controller.ContactoDTO datos = view.addContacto();
-                        boolean falta = model.addContacto(datos, opcionAgenda);
-                        if (falta) {
-                            view.ponloEnOtraAgenda();
-                            opcion = view.pedirOpcion();
-                            if (opcion == 1) {
-                                view.enQueAgenda();
-                                opcionAgenda = view.pedirOpcion();
-                                model.addContacto(datos, opcionAgenda);
-                            }
-                        }
-                    } else if (opcion == 3) {
-                        String busqueda = view.buscarContactoModificar();
-                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
-                        int contactoModificar = view.imprimirContactosModificar(contactosEncontrados);
+        try {
+            for (; ; ) {
+                view.imprimirMenuPrincipal();
+                opcion = view.pedirOpcion();
+                if (opcion == 1) {
+                    List<Agenda> agendas = model.listaDeAgendas;
+                    view.mostrarLsitaAgendas(agendas);
+                    opcionAgenda = view.pedirOpcion();
+                    for (; ; ) {
+                        view.imprimirMenuContactos();
                         opcion = view.pedirOpcion();
+                        System.out.println();
+
                         if (opcion == 1) {
-                          String nombre = view.pedirNombreModificar();
-                          model.modificarNombre(contactosEncontrados, contactoModificar, nombre);
-                        } else {
-                            String telefono = view.pedirTelefonoModificar();
-                            model.modificarTelefono(contactosEncontrados, contactoModificar, telefono);
+                            List<Contacto> contactos = model.listaContactosDeAgenda(opcionAgenda);
+                            view.mostrarContactos(contactos);
+                        } else if (opcion == 2) {
+                            controller.ContactoDTO datos = view.addContacto();
+                            boolean falta = model.addContacto(datos, opcionAgenda);
+                            if (falta) {
+                                view.ponloEnOtraAgenda();
+                                opcion = view.pedirOpcion();
+                                if (opcion == 1) {
+                                    view.enQueAgenda();
+                                    opcionAgenda = view.pedirOpcion();
+                                    model.addContacto(datos, opcionAgenda);
+                                }
+                            }
+                        } else if (opcion == 3) {
+                            String busqueda = view.buscarContactoModificar();
+                            List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
+                            int contactoModificar = view.imprimirContactosModificar(contactosEncontrados);
+                            for (; ; ) {
+                                opcion = view.pedirOpcion();
+                                if (opcion == 1) {
+                                    String nombre = view.pedirNombreModificar();
+                                    model.modificarNombre(contactosEncontrados, contactoModificar, nombre);
+                                    break;
+                                } else if (opcion == 2) {
+                                    String telefono = view.pedirTelefonoModificar();
+                                    model.modificarTelefono(contactosEncontrados, contactoModificar, telefono);
+                                    break;
+                                } else {
+                                    view.imprimirErrorOpcion();
+                                }
+                            }
+                        } else if (opcion == 4) {
+                            String busqueda = view.buscarContacto();
+                            List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
+                            view.imprimirContactosEncontrados(contactosEncontrados);
+                        } else if (opcion == 5) {
+                            controller.ContactoDTO eliminado = view.eliminarContacto();
+                            model.removeContacto(eliminado);
+                        } else if (opcion == 6) {
+                            break;
                         }
-                    } else if (opcion == 4) {
-                        String busqueda = view.buscarContacto();
-                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
-                        view.imprimirContactosEncontrados(contactosEncontrados);
-                    } else if (opcion == 5) {
-                        controller.ContactoDTO eliminado = view.eliminarContacto();
-                        model.removeContacto(eliminado);
-                    } else if (opcion == 6) {
-                        break;
+                        System.out.println();
                     }
-                    System.out.println();
+                } else if (opcion == 2) {
+                    AgendaDTO datos = view.addAgenda();
+                    model.addAgenda(datos);
+                } else if (opcion == 3) {
+                    String eliminado = view.removeAgenda();
+                    model.removeAgenda(eliminado);
                 }
-            } else if (opcion == 2) {
-                AgendaDTO datos = view.addAgenda();
-                model.addAgenda(datos);
-            } else if (opcion == 3) {
-                String eliminado = view.removeAgenda();
-                model.removeAgenda(eliminado);
             }
+        } catch (IndexOutOfBoundsException e) {
+            view.imprimirErrorOpcion();
+            acorrer();
         }
     }
 }
