@@ -1,9 +1,5 @@
 package model;
 
-import controller.ContactoDTO;
-
-import java.util.ArrayList;
-
 public class Contacto {
     public String nombre;
     public String telefono;
@@ -12,6 +8,4 @@ public class Contacto {
         this.nombre = nomConctacto;
         this.telefono = telefContacto;
     }
-
-
 }

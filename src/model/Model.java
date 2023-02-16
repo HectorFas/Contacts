@@ -1,17 +1,14 @@
 package model;
 
 import controller.AgendaDTO;
-import controller.ContactoDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
-    public ArrayList<Contacto> listaAContactos = new ArrayList<>();
     public ArrayList<Agenda> listaDeAgendas = new ArrayList<>();
 
-    public boolean addContacto(ContactoDTO datos, int opcionAgenda) {
-        listaAContactos.add(new Contacto(datos.nombre, datos.telefono));
+    public boolean addContacto(controller.ContactoDTO datos, int opcionAgenda) {
         listaDeAgendas.get(opcionAgenda).contactosDeCadaAgenda.add(new Contacto(datos.nombre, datos.telefono));
 
         for (int i = 0; i < listaDeAgendas.size(); i++) {
@@ -30,18 +27,22 @@ public class Model {
         return listaDeAgendas.get(opcionAgenda).contactosDeCadaAgenda;
     }
 
-    public void removeContacto(ContactoDTO eliminado) {
-       listaAContactos.removeIf(contacto -> contacto.nombre.equals(eliminado.nombre) || contacto.telefono.equals(eliminado.telefono));
+    public void removeContacto(controller.ContactoDTO eliminado) {
+        for (Agenda agenda : listaDeAgendas) {
+            agenda.contactosDeCadaAgenda.removeIf(contacto -> contacto.nombre.equals(eliminado.nombre) || contacto.telefono.equals(eliminado.telefono));
+        }
     }
 
-    public List<Contacto> buscarContactos (String busqueda) {
+    public List<Contacto> buscarContactos(String busqueda, int opcionAgenda) {
         List<Contacto> contactosEncontrados = new ArrayList<>();
-        for (Contacto contacto : listaAContactos) {
+
+        for (Contacto contacto : listaDeAgendas.get(opcionAgenda).contactosDeCadaAgenda) {
             if (contacto.nombre.toLowerCase().contains(busqueda.toLowerCase()) || contacto.telefono.toLowerCase().contains(busqueda.toLowerCase())) {
                 contactosEncontrados.add(contacto);
             }
         }
-        return  contactosEncontrados;  //Para Buscar Contactos!!!
+
+        return contactosEncontrados;  //Para Buscar Contactos!!!
     }
 
     public void addAgenda(AgendaDTO datos) {
@@ -54,18 +55,13 @@ public class Model {
 
 
     public void modificarNombre(List<Contacto> contactosEncontrados, int contactoModificar, String nombre) {
-        for ( Contacto contacto: listaAContactos) {
-            if (contactosEncontrados.get(contactoModificar).equals(contacto)) {
-                contacto.nombre = nombre;
-            }
-        }
+        contactosEncontrados.get(contactoModificar).nombre = nombre;
     }
 
     public void modificarTelefono(List<Contacto> contactosEncontrados, int contactoModificar, String telefono) {
-        for ( Contacto contacto: listaAContactos) {
-            if (contactosEncontrados.get(contactoModificar).equals(contacto)) {
-                contacto.telefono = telefono;
-            }
-        }
+        contactosEncontrados.get(contactoModificar).telefono = telefono;
     }
+
+
+
 }

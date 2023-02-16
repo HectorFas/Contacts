@@ -30,7 +30,7 @@ public class Controller {
                         List<Contacto> contactos = model.listaContactosDeAgenda(opcionAgenda);
                         view.mostrarContactos(contactos);
                     } else if (opcion == 2) {
-                        ContactoDTO datos = view.addContacto();
+                        controller.ContactoDTO datos = view.addContacto();
                         boolean falta = model.addContacto(datos, opcionAgenda);
                         if (falta) {
                             view.ponloEnOtraAgenda();
@@ -43,7 +43,7 @@ public class Controller {
                         }
                     } else if (opcion == 3) {
                         String busqueda = view.buscarContactoModificar();
-                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda);
+                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
                         int contactoModificar = view.imprimirContactosModificar(contactosEncontrados);
                         opcion = view.pedirOpcion();
                         if (opcion == 1) {
@@ -55,10 +55,10 @@ public class Controller {
                         }
                     } else if (opcion == 4) {
                         String busqueda = view.buscarContacto();
-                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda);
+                        List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
                         view.imprimirContactosEncontrados(contactosEncontrados);
                     } else if (opcion == 5) {
-                        ContactoDTO eliminado = view.eliminarContacto();
+                        controller.ContactoDTO eliminado = view.eliminarContacto();
                         model.removeContacto(eliminado);
                     } else if (opcion == 6) {
                         break;

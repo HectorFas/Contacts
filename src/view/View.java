@@ -1,7 +1,6 @@
 package view;
 
 import controller.AgendaDTO;
-import controller.ContactoDTO;
 import model.Agenda;
 import model.Contacto;
 
@@ -26,18 +25,18 @@ public class View {
     // public List <Biblio> obtenerListaDeBibliotecas() {
     // return;  }
 
-    public ContactoDTO addContacto() {
+    public controller.ContactoDTO addContacto() {
         System.out.println("Introduzca el nombre y telefono de su contacto: ");
         String nombre = scanner.next();
         String telefono = scanner.next();
-        return new ContactoDTO(nombre, telefono);
+        return new controller.ContactoDTO(nombre, telefono);
     }
 
 
-    public ContactoDTO eliminarContacto() {
+    public controller.ContactoDTO eliminarContacto() {
         String nombreEliminar = scanner.next();
         String telefonoEliminar = scanner.next();
-        return new ContactoDTO(nombreEliminar, telefonoEliminar);
+        return new controller.ContactoDTO(nombreEliminar, telefonoEliminar);
     }
 
     public void imprimirMenuPrincipal() {
