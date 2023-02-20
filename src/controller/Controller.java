@@ -10,8 +10,8 @@ import java.util.List;
 public class Controller {
     public View view = new View();
     public Model model = new Model();
-    int opcion;
-    int opcionAgenda;
+    int opcion, opcionAgenda, opcionAgendaQueFalta;
+
 
     public void acorrer() {
         try {
@@ -38,8 +38,8 @@ public class Controller {
                                 opcion = view.pedirOpcion();
                                 if (opcion == 1) {
                                     view.enQueAgenda();
-                                    opcionAgenda = view.pedirOpcion();
-                                    model.addContacto(datos, opcionAgenda);
+                                    opcionAgendaQueFalta = view.pedirOpcion();
+                                    model.addContacto(datos, opcionAgendaQueFalta);
                                 }
                             }
                         } else if (opcion == 3) {
@@ -57,7 +57,7 @@ public class Controller {
                                     model.modificarTelefono(contactosEncontrados, contactoModificar, telefono);
                                     break;
                                 } else {
-                                    view.imprimirErrorOpcion();
+                                    view.imprimirErrorOpcionModificar();
                                 }
                             }
                         } else if (opcion == 4) {
@@ -65,6 +65,8 @@ public class Controller {
                             List<Contacto> contactosEncontrados = model.buscarContactos(busqueda, opcionAgenda);
                             view.imprimirContactosEncontrados(contactosEncontrados);
                         } else if (opcion == 5) {
+                            List<Contacto> contactos = model.listaContactosDeAgenda(opcionAgenda);
+                            view.mostrarContactos(contactos);
                             controller.ContactoDTO eliminado = view.eliminarContacto();
                             model.removeContacto(eliminado);
                         } else if (opcion == 6) {

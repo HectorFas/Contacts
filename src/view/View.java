@@ -34,6 +34,9 @@ public class View {
 
 
     public controller.ContactoDTO eliminarContacto() {
+        System.out.println();
+        System.out.println("¿Que contacto quiere eliminar?");
+        System.out.println("-Debe introducir el nombre y telefono exactos-");
         String nombreEliminar = scanner.next();
         String telefonoEliminar = scanner.next();
         return new controller.ContactoDTO(nombreEliminar, telefonoEliminar);
@@ -88,9 +91,15 @@ public class View {
     }
 
     public void imprimirContactosEncontrados(List<Contacto> contactosEncontrados) {
-        System.out.println("Se han encontrado estos contactos: ");
-        contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
-
+        if (contactosEncontrados.size() > 1) {
+            System.out.println("Se han encontrado estos contactos: ");
+            contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
+        } else if (contactosEncontrados.size() == 1){
+            System.out.println("Se ha encontrado este contacto: ");
+            contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
+        } else {
+            System.out.println("No se han encontrado coincidencias con tu busqueda");
+        }
     }
 
     public String buscarContactoModificar() {
@@ -129,6 +138,15 @@ public class View {
         System.out.println("Posibles causas:");
         System.out.println("1. Ha intentado a acceder a un registro inexistente");
         System.out.println("2. Le falta calle");
+        System.out.println("3. No se me ocurre nada más");
+        System.out.println();
+    }
+
+    public void imprimirErrorOpcionModificar() {
+        System.out.println("¡Oh no, ha ocurrido un error!");
+        System.out.println("Debe seleccionar una de las siguientes opciones:");
+        System.out.println("1. El nombre");
+        System.out.println("2. El telefono");
         System.out.println();
     }
 }
