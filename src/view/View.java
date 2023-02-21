@@ -112,7 +112,7 @@ public class View {
             System.out.println("Se ha encontrado este contacto: ");
             contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
         } else {
-            System.out.println("No se han encontrado coincidencias con tu busqueda");
+            error("No se han encontrado coincidencias con tu busqueda");
         }
     }
 
@@ -147,7 +147,7 @@ public class View {
     }
 
     public void imprimirErrorOpcion() {
-        System.out.println("¡Oh no, ha ocurrido un error!");
+        System.out.println(centrar(error("¡Oh no, ha ocurrido un error!")));
         System.out.println("Posibles causas:");
         System.out.println("1. Ha intentado a acceder a un registro inexistente");
         System.out.println("2. Le falta calle");
@@ -156,13 +156,28 @@ public class View {
     }
 
     public void imprimirErrorOpcionModificar() {
-        System.out.println("¡Oh no, ha ocurrido un error!");
+        error(centrar("Oh no, ha ocurrido un error!"));
         System.out.println("Debe seleccionar una de las siguientes opciones:");
         System.out.println("1. El nombre");
         System.out.println("2. El telefono");
         System.out.println();
     }
+
+
+    String error(String texto) {
+        return  "\033[31m \uD83D\uDEA8 ERROR:" + texto + "\033[0m";
+    }
+
+    String centrar(String texto) {
+        return " ".repeat((screen-texto.length())/2) + texto +  " ".repeat((screen-texto.length())/2);
+    }
 }
+
+/*
+20-4
+
+
+ */
 
 
 

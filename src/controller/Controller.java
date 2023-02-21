@@ -80,7 +80,6 @@ public class Controller {
                     AgendaDTO datos = view.addAgenda();
                     model.addAgenda(datos);
                 } else if (opcion == 3) {
-
                     String eliminado = view.removeAgenda();
                     model.removeAgenda(eliminado);
                 }
