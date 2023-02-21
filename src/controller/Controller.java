@@ -5,6 +5,7 @@ import model.Contacto;
 import model.Model;
 import view.View;
 
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class Controller {
@@ -14,14 +15,15 @@ public class Controller {
 
 
     public void acorrer() {
-        try {
-            for (; ; ) {
+
+        for (; ; ) {
+            try {
                 view.imprimirMenuPrincipal();
-                opcion = view.pedirOpcion();
+                opcion = view.pedirOpcion(3);
                 if (opcion == 1) {
                     List<Agenda> agendas = model.listaDeAgendas;
                     view.mostrarLsitaAgendas(agendas);
-                    opcionAgenda = view.pedirOpcion();
+                    opcionAgenda = view.pedirOpcion(agendas.size()-1);
                     for (; ; ) {
                         view.imprimirMenuContactos();
                         opcion = view.pedirOpcion();
@@ -78,13 +80,16 @@ public class Controller {
                     AgendaDTO datos = view.addAgenda();
                     model.addAgenda(datos);
                 } else if (opcion == 3) {
+
                     String eliminado = view.removeAgenda();
                     model.removeAgenda(eliminado);
                 }
+            } catch (IndexOutOfBoundsException exception) {
+                view.imprimirErrorOpcion();
+            } catch (InputMismatchException exception) {
+                view.imprimirErrorOpcion();
+                view.scanner.nextLine();
             }
-        } catch (IndexOutOfBoundsException e) {
-            view.imprimirErrorOpcion();
-            acorrer();
         }
     }
 }

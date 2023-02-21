@@ -41,7 +41,6 @@ public class Model {
                 contactosEncontrados.add(contacto);
             }
         }
-
         return contactosEncontrados;  //Para Buscar Contactos!!!
     }
 

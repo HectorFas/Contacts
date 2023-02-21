@@ -9,11 +9,23 @@ import java.util.Scanner;
 
 public class View {
     public Scanner scanner = new Scanner(System.in);
-
+    int screen = 80;
 
     public int pedirOpcion() {
         int opcion = scanner.nextInt();
         return opcion;
+    }
+
+    public int pedirOpcion(int max) {
+
+        while(true) {
+            int opcion = scanner.nextInt();
+            if (opcion > max) {
+                System.out.println("Opcion incorrecta, max:" + max);
+            } else {
+                return opcion;
+            }
+        }
     }
 
     public void mostrarContactos(List<Contacto> contactos) {
@@ -50,9 +62,11 @@ public class View {
     }
 
     public void mostrarLsitaAgendas(List<Agenda> agendas) {
-            System.out.println("Estas son tus agendas: ");
-            agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda + " ---- " + agenda.contactosDeCadaAgenda.size()));
-            System.out.println("¿Que agenda quieres?");
+        System.out.println("Estas son tus agendas: ");
+        agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda + " ---- " + agenda.contactosDeCadaAgenda.size()));
+        System.out.println("¿Que agenda quieres?");
+
+
     }
 
     public void imprimirMenuContactos() {
@@ -67,12 +81,12 @@ public class View {
     public AgendaDTO addAgenda() {
         String nombreAgenda = scanner.next();
         String descripcionAgenda = scanner.next();
-        return  new AgendaDTO(nombreAgenda, descripcionAgenda);
+        return new AgendaDTO(nombreAgenda, descripcionAgenda);
     }
 
     public String removeAgenda() {
         String nombreAgenda = scanner.next();
-        return  nombreAgenda;
+        return nombreAgenda;
     }
 
     public void ponloEnOtraAgenda() {
@@ -94,7 +108,7 @@ public class View {
         if (contactosEncontrados.size() > 1) {
             System.out.println("Se han encontrado estos contactos: ");
             contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
-        } else if (contactosEncontrados.size() == 1){
+        } else if (contactosEncontrados.size() == 1) {
             System.out.println("Se ha encontrado este contacto: ");
             contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
         } else {
@@ -104,7 +118,7 @@ public class View {
 
     public String buscarContactoModificar() {
         System.out.println("Escribe el nombre o el numero del contacto a modificar");
-        return  scanner.next();
+        return scanner.next();
     }
 
     public int imprimirContactosModificar(List<Contacto> contactosEncontrados) {
@@ -125,7 +139,6 @@ public class View {
         System.out.println("Cual sera el nuevo nombre");
         return scanner.next();
     }
-
 
 
     public String pedirTelefonoModificar() {
