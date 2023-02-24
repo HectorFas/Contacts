@@ -18,14 +18,15 @@ public class Controller {
 
         for (; ; ) {
             try {
+                List<Agenda> agendas = model.listaDeAgendas;
                 view.imprimirMenuPrincipal();
                 opcion = view.pedirOpcion(3);
-                if (opcion == 1) {
-                    List<Agenda> agendas = model.listaDeAgendas;
+                if (opcion == 1 && agendas.size() != 0 ) {
                     view.mostrarLsitaAgendas(agendas);
-                    opcionAgenda = view.pedirOpcion(agendas.size()-1);
+                    opcionAgenda = view.pedirOpcion(agendas.size());
+                    opcionAgenda-=1;
                     for (; ; ) {
-                        view.imprimirMenuContactos();
+                        view.imprimirMenuContactos(agendas, opcionAgenda);
                         opcion = view.pedirOpcion();
                         System.out.println();
 
@@ -79,9 +80,11 @@ public class Controller {
                 } else if (opcion == 2) {
                     AgendaDTO datos = view.addAgenda();
                     model.addAgenda(datos);
-                } else if (opcion == 3) {
+                } else if (opcion == 3 && agendas.size() != 0) {
                     String eliminado = view.removeAgenda();
                     model.removeAgenda(eliminado);
+                } else  {
+                    view.imprimirErrorAgendas();
                 }
             } catch (IndexOutOfBoundsException exception) {
                 view.imprimirErrorOpcion();

@@ -56,26 +56,33 @@ public class View {
 
     public void imprimirMenuPrincipal() {
         System.out.println("-- Bienvenido a tu agenda --");
-        System.out.println("1. Mostrar Agendas");
+        System.out.println("1. " + "\uD83D\uDCD2" + " Mostrar Agendas");
         System.out.println("2. Añadir Agenda");
         System.out.println("3. Eliminar Agenda");
+        System.out.println("--Aviso: Todas las opciones deben ser elegidas mediante numeros--");
     }
 
     public void mostrarLsitaAgendas(List<Agenda> agendas) {
         System.out.println("Estas son tus agendas: ");
-        agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda + " ---- " + agenda.contactosDeCadaAgenda.size()));
+        // No encuentro la forma de imprimir la posicion de la agenda en el arrayList
+        // agendas.forEach(agenda -> System.out.println(agenda.nombreAgenda + " ---- " + agenda.descripcionAgenda + " ---- " + agenda.contactosDeCadaAgenda.size()));
+        for (int i = 0; i < agendas.size() ; i++) {
+            System.out.println(i+1 +" - " + agendas.get(i).nombreAgenda + " ---- " + agendas.get(i).descripcionAgenda + " ---- " + agendas.get(i).contactosDeCadaAgenda.size());
+        }
         System.out.println("¿Que agenda quieres?");
 
 
     }
 
-    public void imprimirMenuContactos() {
-        System.out.println("1. Mostrar lista de contactos");
-        System.out.println("2. Añadir contacto");
-        System.out.println("3. Modificar contacto");
-        System.out.println("4. Buscar contacto");
-        System.out.println("5. Eliminar contacto");
-        System.out.println("6. Salir de la agenda");
+    public void imprimirMenuContactos( List<Agenda> agendas, int opcionAgenda) {
+        System.out.println(centrar("Agenda Acutal: " + agendas.get(opcionAgenda).nombreAgenda));
+        System.out.println("1. " + "\uD83D\uDCD2" + " Mostrar lista de contactos");
+        System.out.println("2. " + "✨" + " Añadir contacto");
+        System.out.println("3. " + "\uD83D\uDC84" + " Modificar contacto");
+        System.out.println("4. " + "\uD83D\uDD0D" +  " Buscar contacto");
+        System.out.println("5. " + "\uD83D\uDD2B"  + " Eliminar contacto");
+        System.out.println("6. " + "\uD83D\uDEAA" +  " Salir de la agenda");
+        System.out.println();
     }
 
     public AgendaDTO addAgenda() {
@@ -112,7 +119,7 @@ public class View {
             System.out.println("Se ha encontrado este contacto: ");
             contactosEncontrados.forEach(contacto -> System.out.println(contacto.nombre + " ----- " + contacto.telefono));
         } else {
-            error("No se han encontrado coincidencias con tu busqueda");
+            System.out.println("No se han encontrado coincidencias con tu busqueda");
         }
     }
 
@@ -152,12 +159,13 @@ public class View {
         System.out.println("1. Ha intentado a acceder a un registro inexistente");
         System.out.println("2. Le falta calle");
         System.out.println("3. No se me ocurre nada más");
+        System.out.println("--- SE HA REINICIADO LA APLICACION ---");
         System.out.println();
     }
 
     public void imprimirErrorOpcionModificar() {
         error(centrar("Oh no, ha ocurrido un error!"));
-        System.out.println("Debe seleccionar una de las siguientes opciones:");
+        System.out.println("Debe seleccionar una de las siguientes opciones: ");
         System.out.println("1. El nombre");
         System.out.println("2. El telefono");
         System.out.println();
@@ -170,6 +178,11 @@ public class View {
 
     String centrar(String texto) {
         return " ".repeat((screen-texto.length())/2) + texto +  " ".repeat((screen-texto.length())/2);
+    }
+
+    public void imprimirErrorAgendas() {
+        System.out.println("No existe ninguna agenda, agrega alguna para que pueda mostrarla");
+        System.out.println();
     }
 }
 
